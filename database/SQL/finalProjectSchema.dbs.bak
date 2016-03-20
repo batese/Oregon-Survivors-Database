@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="OSU CS340 Final Project" id="Project_280242df" html="y" template="Default" database="MySql" >
+	<comment><![CDATA[Oregon Survivors Database]]></comment>
+	<schema name="osu cs340 final project" schemaname="osu cs340 final project" >
+		<table name="osdb_clinic_specialties" >
+			<comment><![CDATA[medical specialties of the medical clinics]]></comment>
+			<column name="cid" type="int" jt="4" >
+				<comment><![CDATA[Clinic ID]]></comment>
+			</column>
+			<column name="tid" type="int" jt="4" >
+				<comment><![CDATA[Disease type id]]></comment>
+			</column>
+			<index name="idx_osdb_clinic_specialties" unique="NORMAL" >
+				<column name="cid" />
+			</index>
+			<index name="idx_osdb_clinic_specialties" unique="NORMAL" >
+				<column name="tid" />
+			</index>
+			<fk name="fk_osdb_clinic_specialties" to_schema="osu cs340 final project" to_table="osdb_clinics" >
+				<fk_column name="cid" pk="id" />
+			</fk>
+			<fk name="fk_osdb_clinic_specialties2" to_schema="osu cs340 final project" to_table="osdb_disease_types" >
+				<fk_column name="tid" pk="id" />
+			</fk>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="osdb_clinics" >
+			<comment><![CDATA[medical clinics in settlements]]></comment>
+			<column name="id" type="int" jt="4" mandatory="y" autoincrement="y" >
+				<comment><![CDATA[ID number]]></comment>
+			</column>
+			<column name="name" type="varchar" length="100" jt="12" mandatory="y" >
+				<comment><![CDATA[Name of clinic]]></comment>
+			</column>
+			<column name="location" type="varchar" length="255" jt="12" mandatory="y" >
+				<comment><![CDATA[What settlement the clinic is in]]></comment>
+			</column>
+			<index name="pk_osdb_clinics" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_osdb_clinics" unique="NORMAL" >
+				<column name="location" />
+			</index>
+			<fk name="fk_osdb_clinics" to_schema="osu cs340 final project" to_table="osdb_settlements" >
+				<fk_column name="location" pk="id" />
+			</fk>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="osdb_disease_symptoms" >
+			<comment><![CDATA[Relation between diseases and symptoms]]></comment>
+			<column name="sid" type="int" jt="4" >
+				<comment><![CDATA[Symptom ID]]></comment>
+			</column>
+			<column name="did" type="int" jt="4" >
+				<comment><![CDATA[Disease ID]]></comment>
+			</column>
+			<index name="idx_osdb_disease_symptoms" unique="NORMAL" >
+				<column name="did" />
+			</index>
+			<index name="idx_osdb_disease_symptoms_0" unique="NORMAL" >
+				<column name="sid" />
+			</index>
+			<fk name="fk_osdb_disease_symptoms" to_schema="osu cs340 final project" to_table="osdb_diseases" >
+				<fk_column name="did" pk="id" />
+			</fk>
+			<fk name="fk_osdb_disease_symptoms2" to_schema="osu cs340 final project" to_table="osdb_symptoms" >
+				<fk_column name="sid" pk="id" />
+			</fk>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="osdb_disease_types" >
+			<comment><![CDATA[Types of disease]]></comment>
+			<column name="id" type="int" jt="4" mandatory="y" autoincrement="y" >
+				<comment><![CDATA[Unique id number]]></comment>
+			</column>
+			<column name="name" type="varchar" length="266" jt="12" mandatory="y" />
+			<index name="pk_osdb_disease_types" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="osdb_diseases" >
+			<comment><![CDATA[Diseases from the wasteland]]></comment>
+			<column name="id" type="int" jt="4" mandatory="y" autoincrement="y" >
+				<comment><![CDATA[Unique id number]]></comment>
+			</column>
+			<column name="name" type="varchar" length="255" jt="12" mandatory="y" >
+				<comment><![CDATA[Name of the disease]]></comment>
+			</column>
+			<column name="description" type="text" jt="-1" mandatory="y" >
+				<comment><![CDATA[Description of disease]]></comment>
+			</column>
+			<column name="disease_type" type="int" jt="4" mandatory="y" />
+			<index name="pk_osdb_diseases" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_osdb_diseases" unique="NORMAL" >
+				<column name="disease_type" />
+			</index>
+			<fk name="fk_osdb_diseases" to_schema="osu cs340 final project" to_table="osdb_disease_types" >
+				<fk_column name="disease_type" pk="id" />
+			</fk>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="osdb_medical_personnel" >
+			<comment><![CDATA[Medical personnel]]></comment>
+			<column name="id" type="int" jt="4" mandatory="y" autoincrement="y" >
+				<comment><![CDATA[Medical id number]]></comment>
+			</column>
+			<column name="pid" type="int" jt="4" mandatory="y" >
+				<comment><![CDATA[Person identification]]></comment>
+			</column>
+			<column name="cid" type="int" jt="4" >
+				<comment><![CDATA[Clinic where person works]]></comment>
+			</column>
+			<index name="pk_osdb_medical_personnel" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_osdb_medical_personnel" unique="NORMAL" >
+				<column name="cid" />
+			</index>
+			<index name="idx_osdb_medical_personnel_0" unique="NORMAL" >
+				<column name="pid" />
+			</index>
+			<fk name="fk_osdb_medical_personnel" to_schema="osu cs340 final project" to_table="osdb_clinics" >
+				<fk_column name="cid" pk="id" />
+			</fk>
+			<fk name="fk_osdb_medical_personnel2" to_schema="osu cs340 final project" to_table="osdb_people" >
+				<fk_column name="pid" pk="id" />
+			</fk>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="osdb_people" >
+			<comment><![CDATA[Survivors]]></comment>
+			<column name="id" type="int" jt="4" mandatory="y" autoincrement="y" >
+				<comment><![CDATA[ID number]]></comment>
+			</column>
+			<column name="fname" type="varchar" length="255" jt="12" mandatory="y" >
+				<comment><![CDATA[First name]]></comment>
+			</column>
+			<column name="mname" type="varchar" length="255" jt="12" >
+				<comment><![CDATA[Middle name]]></comment>
+			</column>
+			<column name="lname" type="varchar" length="255" jt="12" mandatory="y" >
+				<comment><![CDATA[Last name]]></comment>
+			</column>
+			<column name="dob" type="date" jt="91" mandatory="y" >
+				<comment><![CDATA[Date of birth]]></comment>
+			</column>
+			<column name="socsec" type="varchar" length="35" jt="12" >
+				<comment><![CDATA[Social security numer]]></comment>
+			</column>
+			<column name="gender" type="varchar" length="35" jt="12" mandatory="y" >
+				<comment><![CDATA[Gender]]></comment>
+			</column>
+			<column name="home" type="int" jt="4" >
+				<comment><![CDATA[Where the survivor lives]]></comment>
+			</column>
+			<index name="pk_osdb_people" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_osdb_people" unique="NORMAL" >
+				<column name="home" />
+			</index>
+			<fk name="fk_osdb_people" to_schema="osu cs340 final project" to_table="osdb_settlements" >
+				<fk_column name="home" pk="id" />
+			</fk>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="osdb_personnel_specialties" >
+			<column name="pid" type="int" jt="4" >
+				<comment><![CDATA[Personnel id]]></comment>
+			</column>
+			<column name="tid" type="int" jt="4" >
+				<comment><![CDATA[Disease type ID]]></comment>
+			</column>
+			<index name="idx_osdb_personnel_specialties" unique="NORMAL" >
+				<column name="pid" />
+			</index>
+			<index name="idx_osdb_personnel_specialties" unique="NORMAL" >
+				<column name="tid" />
+			</index>
+			<fk name="fk_osdb_personnel_specialties" to_schema="osu cs340 final project" to_table="osdb_medical_personnel" >
+				<fk_column name="pid" pk="id" />
+			</fk>
+			<fk name="fk_osdb_personnel_specialties2" to_schema="osu cs340 final project" to_table="osdb_disease_types" >
+				<fk_column name="tid" pk="id" />
+			</fk>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="osdb_settlements" >
+			<comment><![CDATA[Settlements where people live]]></comment>
+			<column name="id" type="int" length="100" jt="4" mandatory="y" autoincrement="y" >
+				<comment><![CDATA[Identification number]]></comment>
+			</column>
+			<column name="name" type="varchar" length="255" jt="12" mandatory="y" >
+				<comment><![CDATA[Name of settlement]]></comment>
+			</column>
+			<column name="longitude" type="float" jt="7" mandatory="y" >
+				<comment><![CDATA[Degrees longitude]]></comment>
+			</column>
+			<column name="latitude" type="float" jt="7" mandatory="y" >
+				<comment><![CDATA[Degrees latitude]]></comment>
+			</column>
+			<index name="pk_osdb_settlements" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="osdb_symptoms" >
+			<comment><![CDATA[Symptoms for diseases]]></comment>
+			<column name="id" type="int" jt="4" mandatory="y" autoincrement="y" >
+				<comment><![CDATA[unique id number]]></comment>
+			</column>
+			<column name="name" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="description" type="text" jt="-1" mandatory="y" />
+			<index name="pk_osdb_symptoms" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+	</schema>
+	<layout id="Layout_1fc19c0" name="OSU CS340 Final Project" show_relation_columns="y" >
+		<entity schema="osu cs340 final project" name="osdb_settlements" color="b7c8e3" x="45" y="135" />
+		<entity schema="osu cs340 final project" name="osdb_symptoms" color="b7c8e3" x="930" y="390" />
+		<entity schema="osu cs340 final project" name="osdb_diseases" color="b7c8e3" x="585" y="465" />
+		<entity schema="osu cs340 final project" name="osdb_disease_types" color="b7c8e3" x="375" y="435" />
+		<entity schema="osu cs340 final project" name="osdb_clinic_specialties" color="b7c8e3" x="90" y="360" />
+		<entity schema="osu cs340 final project" name="osdb_clinics" color="b7c8e3" x="420" y="255" />
+		<entity schema="osu cs340 final project" name="osdb_medical_personnel" color="b7c8e3" x="600" y="180" />
+		<entity schema="osu cs340 final project" name="osdb_disease_symptoms" color="b7c8e3" x="735" y="450" />
+		<entity schema="osu cs340 final project" name="osdb_personnel_specialties" color="b7c8e3" x="570" y="315" />
+		<entity schema="osu cs340 final project" name="osdb_people" color="b7c8e3" x="345" y="45" />
+		<script name="Sql" id="Query_c9cce65" language="SQL" >
+			<string><![CDATA[CREATE SCHEMA `osu cs340 final project`;
+
+CREATE TABLE `osu cs340 final project`.osdb_disease_types ( 
+	id                   int  NOT NULL  AUTO_INCREMENT,
+	name                 varchar(266)  NOT NULL  ,
+	CONSTRAINT pk_osdb_disease_types PRIMARY KEY ( id )
+ ) engine=InnoDB;
+
+ALTER TABLE `osu cs340 final project`.osdb_disease_types COMMENT 'Types of disease';
+
+ALTER TABLE `osu cs340 final project`.osdb_disease_types MODIFY id int  NOT NULL  AUTO_INCREMENT COMMENT 'Unique id number';
+
+CREATE TABLE `osu cs340 final project`.osdb_diseases ( 
+	id                   int  NOT NULL  AUTO_INCREMENT,
+	name                 varchar(255)  NOT NULL  ,
+	description          text  NOT NULL  ,
+	disease_type         int  NOT NULL  ,
+	CONSTRAINT pk_osdb_diseases PRIMARY KEY ( id ),
+	CONSTRAINT fk_osdb_diseases FOREIGN KEY ( disease_type ) REFERENCES `osu cs340 final project`.osdb_disease_types( id ) ON DELETE NO ACTION ON UPDATE NO ACTION
+ ) engine=InnoDB;
+
+CREATE INDEX idx_osdb_diseases ON `osu cs340 final project`.osdb_diseases ( disease_type );
+
+ALTER TABLE `osu cs340 final project`.osdb_diseases COMMENT 'Diseases from the wasteland';
+
+ALTER TABLE `osu cs340 final project`.osdb_diseases MODIFY id int  NOT NULL  AUTO_INCREMENT COMMENT 'Unique id number';
+
+ALTER TABLE `osu cs340 final project`.osdb_diseases MODIFY name varchar(255)  NOT NULL   COMMENT 'Name of the disease';
+
+ALTER TABLE `osu cs340 final project`.osdb_diseases MODIFY description text  NOT NULL   COMMENT 'Description of disease';
+
+CREATE TABLE `osu cs340 final project`.osdb_settlements ( 
+	id                   int  NOT NULL  AUTO_INCREMENT,
+	name                 varchar(255)  NOT NULL  ,
+	longitude            float  NOT NULL  ,
+	latitude             float  NOT NULL  ,
+	CONSTRAINT pk_osdb_settlements PRIMARY KEY ( id )
+ ) engine=InnoDB;
+
+ALTER TABLE `osu cs340 final project`.osdb_settlements COMMENT 'Settlements where people live';
+
+ALTER TABLE `osu cs340 final project`.osdb_settlements MODIFY id int  NOT NULL  AUTO_INCREMENT COMMENT 'Identification number';
+
+ALTER TABLE `osu cs340 final project`.osdb_settlements MODIFY name varchar(255)  NOT NULL   COMMENT 'Name of settlement';
+
+ALTER TABLE `osu cs340 final project`.osdb_settlements MODIFY longitude float  NOT NULL   COMMENT 'Degrees longitude';
+
+ALTER TABLE `osu cs340 final project`.osdb_settlements MODIFY latitude float  NOT NULL   COMMENT 'Degrees latitude';
+
+CREATE TABLE `osu cs340 final project`.osdb_symptoms ( 
+	id                   int  NOT NULL  AUTO_INCREMENT,
+	name                 varchar(100)  NOT NULL  ,
+	description          text  NOT NULL  ,
+	CONSTRAINT pk_osdb_symptoms PRIMARY KEY ( id )
+ ) engine=InnoDB;
+
+ALTER TABLE `osu cs340 final project`.osdb_symptoms COMMENT 'Symptoms for diseases';
+
+ALTER TABLE `osu cs340 final project`.osdb_symptoms MODIFY id int  NOT NULL  AUTO_INCREMENT COMMENT 'unique id number';
+
+CREATE TABLE `osu cs340 final project`.osdb_clinics ( 
+	id                   int  NOT NULL  AUTO_INCREMENT,
+	name                 varchar(100)  NOT NULL  ,
+	location             varchar(255)  NOT NULL  ,
+	CONSTRAINT pk_osdb_clinics PRIMARY KEY ( id ),
+	CONSTRAINT fk_osdb_clinics FOREIGN KEY ( location ) REFERENCES `osu cs340 final project`.osdb_settlements( id ) ON DELETE NO ACTION ON UPDATE NO ACTION
+ ) engine=InnoDB;
+
+CREATE INDEX idx_osdb_clinics ON `osu cs340 final project`.osdb_clinics ( location );
+
+ALTER TABLE `osu cs340 final project`.osdb_clinics COMMENT 'medical clinics in settlements';
+
+ALTER TABLE `osu cs340 final project`.osdb_clinics MODIFY id int  NOT NULL  AUTO_INCREMENT COMMENT 'ID number';
+
+ALTER TABLE `osu cs340 final project`.osdb_clinics MODIFY name varchar(100)  NOT NULL   COMMENT 'Name of clinic';
+
+ALTER TABLE `osu cs340 final project`.osdb_clinics MODIFY location varchar(255)  NOT NULL   COMMENT 'What settlement the clinic is in';
+
+CREATE TABLE `osu cs340 final project`.osdb_disease_symptoms ( 
+	sid                  int    ,
+	did                  int    ,
+	CONSTRAINT fk_osdb_disease_symptoms FOREIGN KEY ( did ) REFERENCES `osu cs340 final project`.osdb_diseases( id ) ON DELETE NO ACTION ON UPDATE NO ACTION,
+	CONSTRAINT fk_osdb_disease_symptoms2 FOREIGN KEY ( sid ) REFERENCES `osu cs340 final project`.osdb_symptoms( id ) ON DELETE NO ACTION ON UPDATE NO ACTION
+ ) engine=InnoDB;
+
+CREATE INDEX idx_osdb_disease_symptoms ON `osu cs340 final project`.osdb_disease_symptoms ( did );
+
+CREATE INDEX idx_osdb_disease_symptoms_0 ON `osu cs340 final project`.osdb_disease_symptoms ( sid );
+
+ALTER TABLE `osu cs340 final project`.osdb_disease_symptoms COMMENT 'Relation between diseases and symptoms';
+
+ALTER TABLE `osu cs340 final project`.osdb_disease_symptoms MODIFY sid int     COMMENT 'Symptom ID';
+
+ALTER TABLE `osu cs340 final project`.osdb_disease_symptoms MODIFY did int     COMMENT 'Disease ID';
+
+CREATE TABLE `osu cs340 final project`.osdb_people ( 
+	id                   int  NOT NULL  AUTO_INCREMENT,
+	fname                varchar(255)  NOT NULL  ,
+	mname                varchar(255)    ,
+	lname                varchar(255)  NOT NULL  ,
+	dob                  date  NOT NULL  ,
+	socsec               varchar(35)    ,
+	gender               varchar(35)  NOT NULL  ,
+	home                 int    ,
+	CONSTRAINT pk_osdb_people PRIMARY KEY ( id ),
+	CONSTRAINT fk_osdb_people FOREIGN KEY ( home ) REFERENCES `osu cs340 final project`.osdb_settlements( id ) ON DELETE NO ACTION ON UPDATE NO ACTION
+ ) engine=InnoDB;
+
+CREATE INDEX idx_osdb_people ON `osu cs340 final project`.osdb_people ( home );
+
+ALTER TABLE `osu cs340 final project`.osdb_people COMMENT 'Survivors';
+
+ALTER TABLE `osu cs340 final project`.osdb_people MODIFY id int  NOT NULL  AUTO_INCREMENT COMMENT 'ID number';
+
+ALTER TABLE `osu cs340 final project`.osdb_people MODIFY fname varchar(255)  NOT NULL   COMMENT 'First name';
+
+ALTER TABLE `osu cs340 final project`.osdb_people MODIFY mname varchar(255)     COMMENT 'Middle name';
+
+ALTER TABLE `osu cs340 final project`.osdb_people MODIFY lname varchar(255)  NOT NULL   COMMENT 'Last name';
+
+ALTER TABLE `osu cs340 final project`.osdb_people MODIFY dob date  NOT NULL   COMMENT 'Date of birth';
+
+ALTER TABLE `osu cs340 final project`.osdb_people MODIFY socsec varchar(35)     COMMENT 'Social security numer';
+
+ALTER TABLE `osu cs340 final project`.osdb_people MODIFY gender varchar(35)  NOT NULL   COMMENT 'Gender';
+
+ALTER TABLE `osu cs340 final project`.osdb_people MODIFY home int     COMMENT 'Where the survivor lives';
+
+CREATE TABLE `osu cs340 final project`.osdb_clinic_specialties ( 
+	cid                  int    ,
+	tid                  int    ,
+	CONSTRAINT fk_osdb_clinic_specialties FOREIGN KEY ( cid ) REFERENCES `osu cs340 final project`.osdb_clinics( id ) ON DELETE NO ACTION ON UPDATE NO ACTION,
+	CONSTRAINT fk_osdb_clinic_specialties2 FOREIGN KEY ( tid ) REFERENCES `osu cs340 final project`.osdb_disease_types( id ) ON DELETE NO ACTION ON UPDATE NO ACTION
+ ) engine=InnoDB;
+
+CREATE INDEX idx_osdb_clinic_specialties ON `osu cs340 final project`.osdb_clinic_specialties ( cid );
+
+CREATE INDEX idx_osdb_clinic_specialties ON `osu cs340 final project`.osdb_clinic_specialties ( tid );
+
+ALTER TABLE `osu cs340 final project`.osdb_clinic_specialties COMMENT 'medical specialties of the medical clinics';
+
+ALTER TABLE `osu cs340 final project`.osdb_clinic_specialties MODIFY cid int     COMMENT 'Clinic ID';
+
+ALTER TABLE `osu cs340 final project`.osdb_clinic_specialties MODIFY tid int     COMMENT 'Disease type id';
+
+CREATE TABLE `osu cs340 final project`.osdb_medical_personnel ( 
+	id                   int  NOT NULL  AUTO_INCREMENT,
+	pid                  int  NOT NULL  ,
+	cid                  int    ,
+	CONSTRAINT pk_osdb_medical_personnel PRIMARY KEY ( id ),
+	CONSTRAINT fk_osdb_medical_personnel FOREIGN KEY ( cid ) REFERENCES `osu cs340 final project`.osdb_clinics( id ) ON DELETE NO ACTION ON UPDATE NO ACTION,
+	CONSTRAINT fk_osdb_medical_personnel2 FOREIGN KEY ( pid ) REFERENCES `osu cs340 final project`.osdb_people( id ) ON DELETE NO ACTION ON UPDATE NO ACTION
+ ) engine=InnoDB;
+
+CREATE INDEX idx_osdb_medical_personnel ON `osu cs340 final project`.osdb_medical_personnel ( cid );
+
+CREATE INDEX idx_osdb_medical_personnel_0 ON `osu cs340 final project`.osdb_medical_personnel ( pid );
+
+ALTER TABLE `osu cs340 final project`.osdb_medical_personnel COMMENT 'Medical personnel';
+
+ALTER TABLE `osu cs340 final project`.osdb_medical_personnel MODIFY id int  NOT NULL  AUTO_INCREMENT COMMENT 'Medical id number';
+
+ALTER TABLE `osu cs340 final project`.osdb_medical_personnel MODIFY pid int  NOT NULL   COMMENT 'Person identification';
+
+ALTER TABLE `osu cs340 final project`.osdb_medical_personnel MODIFY cid int     COMMENT 'Clinic where person works';
+
+CREATE TABLE `osu cs340 final project`.osdb_personnel_specialties ( 
+	pid                  int    ,
+	tid                  int    ,
+	CONSTRAINT fk_osdb_personnel_specialties FOREIGN KEY ( pid ) REFERENCES `osu cs340 final project`.osdb_medical_personnel( id ) ON DELETE NO ACTION ON UPDATE NO ACTION,
+	CONSTRAINT fk_osdb_personnel_specialties2 FOREIGN KEY ( tid ) REFERENCES `osu cs340 final project`.osdb_disease_types( id ) ON DELETE NO ACTION ON UPDATE NO ACTION
+ ) engine=InnoDB;
+
+CREATE INDEX idx_osdb_personnel_specialties ON `osu cs340 final project`.osdb_personnel_specialties ( pid );
+
+CREATE INDEX idx_osdb_personnel_specialties ON `osu cs340 final project`.osdb_personnel_specialties ( tid );
+
+ALTER TABLE `osu cs340 final project`.osdb_personnel_specialties MODIFY pid int     COMMENT 'Personnel id';
+
+ALTER TABLE `osu cs340 final project`.osdb_personnel_specialties MODIFY tid int     COMMENT 'Disease type ID';
+
+]]></string>
+		</script>
+	</layout>
+</project>

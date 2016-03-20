@@ -1,0 +1,11 @@
+INSERT INTO osdb_disease_types (name) VALUES ("Respiritory Diseases");
+INSERT INTO osdb_disease_types (name) VALUES ("Viral Infections");
+INSERT INTO osdb_disease_types (name) VALUES ("Internal Mutations");
+INSERT INTO osdb_disease_types (name) VALUES ("External Mutations");
+INSERT INTO osdb_disease_types (name) VALUES ("Skin and Subcutaneous Diseases");
+INSERT INTO osdb_disease_types (name) VALUES ("Nervous System Diseases");
+INSERT INTO osdb_disease_types (name) VALUES ("Blood Diseases");
+INSERT INTO osdb_disease_types (name) VALUES ("Eye and Adnexia Diseases");
+INSERT INTO osdb_disease_types (name) VALUES ("Ear and Mastoid Process Diseases");
+INSERT INTO osdb_disease_types (name) VALUES ("Digestive Diseases");
+INSERT INTO osdb_disease_types (name) VALUES ("Muscoskeletal Diseases");

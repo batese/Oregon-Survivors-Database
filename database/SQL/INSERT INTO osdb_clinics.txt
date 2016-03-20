@@ -1,0 +1,14 @@
+INSERT INTO osdb_clinics (name, location, address1, address2) VALUES ("Portland Free Clinic", 1, "5 New Street", "Northern District");
+INSERT INTO osdb_clinics (name, location, address1) VALUES ("Salem Free Clinic", 2, "7 Main Street");
+INSERT INTO osdb_clinics (name, location, address1) VALUES ("Our Lady of Guadalupe", 3, "1 Freedom Avenue");
+INSERT INTO osdb_clinics (name, location, address1) VALUES ("Gresham Community Hospital", 4, "6 First Street"); 
+INSERT INTO osdb_clinics (name, location, address1) VALUES ("Hillsboro Free Clinic", 5, "2 Main Street");
+INSERT INTO osdb_clinics (name, location, address1) VALUES ("Beaverton Medical Centre", 6, "9 New Street");
+INSERT INTO osdb_clinics (name, location, address1) VALUES ("Bend Community Hospital", 7, "1 Liberty Steet");
+INSERT INTO osdb_clinics (name, location, address1) VALUES ("Medford Free Hospital", 8, "3 Main Street");
+INSERT INTO osdb_clinics (name, location, address1) VALUES ("Hibbert's Free Clinic", 9, "11 Freedom Drive");
+INSERT INTO osdb_clinics (name, location, address1) VALUES ("OSU Student Medical Centre", 10, "9 Jefferson Way");
+INSERT INTO osdb_clinics (name, location, address1) VALUES ("Albany Community Hospital", 11, "3 Liberty Street");
+INSERT INTO osdb_clinics (name, location, address1) VALUES ("Tigard Medical Centre", 12, "4 Church Street");
+INSERT INTO osdb_clinics (name, location, address1) VALUES ("Lake Oswego Medical Centre", 13, "6 New Street");
+INSERT INTO osdb_clinics (name, location, address1) VALUES ("Grants Pass Health Centre", 14, "7 Grant Street");

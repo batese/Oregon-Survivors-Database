@@ -1,0 +1,34 @@
+SETTLEMENTS:
+INSERT INTO osdb_settlements (name, longitude, latitude) VALUES (“Portland”, 45.52, 122.6819);
+INSERT INTO osdb_settlements (name, longitude, latitude) VALUES ("Salem", 44.9308, 123.0289);
+
+PEOPLE:
+INSERT INTO osdb_people (fname, mname, lname, dob, socsec, gender, home) VALUES ("Elliot", "Alexander", "Bates", "15/01/1989", "111-11-1111", "Male", 1);
+INSERT INTO osdb_people (fname, lname, dob, socsec, gender, home) VALUES ("Susan", "Bates", "10/06/1953", "111-11-1112", "Female", 1);
+INSERT INTO osdb_people (fname, mname, lname, dob, gender, home) VALUES ("John", "James", "Smith", "27/04/2017", "111-11-1113", "Male", 1);
+
+CLINICS:
+INSERT INTO osdb_clinics (name, location, address1, address2) VALUES ("Portland Free Clinic", 1, "5 New Street", "Northern District"); 
+INSERT INTO osdb_clinics (name, location, address1) VALUES ("Salem Free Clinic", 2, "7 Main Street");
+
+DISEASE TYPES:
+INSERT INTO osdb_disease_type (name) VALUES ("Respiritory Diseases");
+
+MEDICAL PERSONNEL:
+INSERT INTO osdb_medical_personnel (pid, cid) VALUES (1, 2);
+INSERT INTO osdb_medical_personnel (pid) VALUES (2);
+
+DISEASES:
+INSERT INTO osdb_diseases (name, description, disease_type) VALUES ("Radioactive lesions", "Areas of skin which have suffered damage through radioactive exposure", 1);
+
+SYMPTOMS:
+INSERT INTO osdb_symptoms (name, description) VALUES ("Name1", "Description1");
+
+DISEASE-SYMPTOMS:
+INSERT INTO osdb_disease_symptoms (sid, did) VALUES (1, 1);
+
+CLINIC-SPECIALTIES:
+INSERT INTO osdb_clinic_specialties (cid, tid) VALUES (1, 1);
+
+PERSONNEL-SPECIALTIES:
+INSERT INTO osdb_personnel_specialties (pid, tid) VALUES (1, 1);

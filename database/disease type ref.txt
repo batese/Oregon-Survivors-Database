@@ -1,0 +1,12 @@
+1)  Respiritory Diseases
+2)  Viral Infections
+3)  Internal Mutations
+4)  External Mutations
+5)  Skin and Subcutaneous Diseases
+6)  Nervous System Diseases
+7)  Infectious and Parasitic Diseases
+8)  Blood Diseases
+9)  Eye and Adnexia Diseases
+10) Ear and Mastoid Process Diseases
+11) Digestive Diseases
+12) Muscoskeletal Diseases
